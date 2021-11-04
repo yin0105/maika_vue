@@ -8,7 +8,7 @@
 ==========================================================================================*/
 @import '../_variables.scss';
 
-.my-btn-primary {
+.my-btn-primary.vs-button-filled {
     background-color: $primary !important;
     padding: 11px 16px 10px 16px !important;
     font-size: 14px !important;

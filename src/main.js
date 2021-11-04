@@ -17,6 +17,13 @@ import 'material-icons/iconfont/material-icons.css' //Material Icons
 import 'vuesax/dist/vuesax.css' // Vuesax
 Vue.use(Vuesax)
 
+import { BootstrapVue } from 'bootstrap-vue'
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
+// import './app.scss'
+
+Vue.use(BootstrapVue)
+
 
 // axios
 import axios from './axios.js'

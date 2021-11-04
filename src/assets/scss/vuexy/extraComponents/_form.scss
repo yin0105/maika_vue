@@ -1,14 +1,19 @@
 /*=========================================================================================
-    File Name: featherIcon.scss
-    Description: Feather icon component's scss. Imported in FeatherIcon.vue file
+    File Name: _button.scss
+    Description: Styles for button.
     ----------------------------------------------------------------------------------------
     Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
       Author: Pixinvent
     Author URL: http://www.themeforest.net/user/pixinvent
 ==========================================================================================*/
+@import '../_variables.scss';
 
+input.my-bootstrap {
+    color: $text-color-1 !important;
+    line-height: 28px !important;
+}
 
-.feather-icon {
-    display: inline-flex;
-    align-items: center;
+label.my-bootstrap {
+    color: $text-color-1 !important;
+    line-height: 19px !important;
 }

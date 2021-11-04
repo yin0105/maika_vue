@@ -57,8 +57,8 @@
       </vs-dropdown-menu>
     </vs-dropdown>
 
-    <div class="leading-tight hidden sm:block d-block" style="margin-left: 4px">
-      <p>{{ activeUserInfo.displayName }}</p>
+    <div class="leading-tight grid" style="margin-left: 4px">
+      <span>{{ activeUserInfo.displayName }}</span>
       <small>Admin</small>
     </div>
   </div>
