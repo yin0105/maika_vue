@@ -11,6 +11,14 @@
 .user-item {
     margin: 0px 14px;
 
+    &.narrow {
+        margin: 0px !important;
+
+        .user-avatar-info {
+            padding: 10px 15px 9px !important;
+        }
+    }
+
     .con-img.vs-avatar--con-img {
         border: solid 1px white !important;
     }
@@ -52,7 +60,7 @@
 
     .user-avatar-info {
         border-bottom: solid 1px $light-gray;
-        padding: 10px 0px 9px 28px !important;
+        padding: 10px 0px 9px 28px !important;        
 
         &>div {
             height: 50px;

@@ -1,19 +1,30 @@
 <template>
   <div id="page-user-view">
 
-    <div id="user-data" v-if="user_data" class="grid lg:grid-cols-11 lg:gap-10">
+    <div id="user-data" class="grid lg:grid-cols-11 lg:gap-10">
         <div class="lg:col-span-2">    
-          <vx-card title="Users/Location" class="mb-base">
-            <div class="sub-title">
+          <vx-card title="Users/Location" class="mb-base narrow">
+            <div class="sub-title px-4">
                 Type of targeted entity
             </div>  
-            <v-select :options="['User','Location']" />
-            <div v-if="targetedEntityType == 'User'">
-                <div class="flex">
-                    Filter by
-                    <v-select :options="['User','Location']" />
-                </div>
-            </div>         
+            <v-select :options="['User','Location']" class="px-4" />
+            <div v-if="targetedEntityType == 'User'"  class="px-4 flex mt-6 items-center">
+                <span class="w-2/5">Filter by</span>
+                <v-select :options="['User','Location']" class="w-3/5 "/>
+            </div>
+            <div class="mt-8 mb-2">
+              <ul>
+                <li class="cursor-pointer" v-for="(contact, index) in contacts" :key="index">
+                  <user-item :contact="contact" narrow="true"/>
+                </li>
+              </ul>
+            </div>
+            <div class="mt-12">
+              <b-button variant="primary" class="bottom-btn create flex items-center mx-auto">
+                <feather-icon icon="PlusCircleIcon"/>
+                Choose
+              </b-button>
+            </div>
           </vx-card>
         </div>
 
@@ -41,13 +52,15 @@ import moduleUserManagement from '@/store/user-management/moduleUserManagement.j
 import vSelect from 'vue-select'
 import UserItem from '../components/UserItem.vue'
 import moduleChat          from '@/store/chat/moduleChat.js'
+import { contacts } from './data'
 
 export default {
   data () {
     return {
       user_data: null,
       user_not_found: false,
-      targetedEntityType: 'User'
+      targetedEntityType: 'User',
+      contacts: contacts,
     }
   },
   computed: {
@@ -88,41 +101,41 @@ export default {
       })
     }
   },
-  created () {
-    // Register Module UserManagement Module
-    this.$store.registerModule('chat', moduleChat)
-    this.$store.dispatch('chat/fetchContacts')
-    if (!moduleUserManagement.isRegistered) {
-      this.$store.registerModule('userManagement', moduleUserManagement)
-      moduleUserManagement.isRegistered = true
-    }
+  // created () {
+  //   // Register Module UserManagement Module
+  //   this.$store.registerModule('chat', moduleChat)
+  //   this.$store.dispatch('chat/fetchContacts')
+  //   if (!moduleUserManagement.isRegistered) {
+  //     this.$store.registerModule('userManagement', moduleUserManagement)
+  //     moduleUserManagement.isRegistered = true
+  //   }
 
-    const userId = this.$route.params.userId
-    this.$store.dispatch('userManagement/fetchUser', '268')
-      .then(res => { this.user_data = res.data })
-      .catch(err => {
-        if (err.response.status === 404) {
-          this.user_not_found = true
-          return
-        }
-        console.error(err) 
-      })
-  },
-  beforeDestroy () {
-    this.$store.unregisterModule('chat')
-  },
-  mounted () {
-    this.$store.dispatch('chat/setChatSearchQuery', '')
-  },
-  computed: {
-    contacts () {
-      console.log("contact = ", this.$store.getters['chat/contacts'])
-      return this.$store.getters['chat/contacts'].map(contact => {
-        contact.status = contact.status == "online"? "#2DCA8C": "#FF715B";
-        return contact;
-      });
-    },
-  },
+  //   const userId = this.$route.params.userId
+  //   this.$store.dispatch('userManagement/fetchUser', '268')
+  //     .then(res => { this.user_data = res.data })
+  //     .catch(err => {
+  //       if (err.response.status === 404) {
+  //         this.user_not_found = true
+  //         return
+  //       }
+  //       console.error(err) 
+  //     })
+  // },
+  // beforeDestroy () {
+  //   this.$store.unregisterModule('chat')
+  // },
+  // mounted () {
+  //   this.$store.dispatch('chat/setChatSearchQuery', '')
+  // },
+  // computed: {
+  //   contacts () {
+  //     console.log("contact = ", this.$store.getters['chat/contacts'])
+  //     return this.$store.getters['chat/contacts'].map(contact => {
+  //       contact.status = contact.status == "online"? "#2DCA8C": "#FF715B";
+  //       return contact;
+  //     });
+  //   },
+  // },
   components: {
     'v-select': vSelect,
     'user-item': UserItem
@@ -191,6 +204,7 @@ only screen and (min-width:636px) and (max-width:991px) {
 </style>
 
 <style lang="scss">
+  @import "@/assets/scss/vuexy/extraComponents/_form.scss";
   @import "@/assets/scss/vuexy/extraComponents/_button.scss";
   @import "@/assets/scss/vuexy/extraComponents/_select.scss";
 </style>

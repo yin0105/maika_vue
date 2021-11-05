@@ -21,3 +21,13 @@
         color: $text-color-1 !important;
     }
 }
+
+.vx-card.narrow {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    
+    .vx-card__header {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+}
