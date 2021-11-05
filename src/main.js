@@ -18,11 +18,30 @@ import 'vuesax/dist/vuesax.css' // Vuesax
 Vue.use(Vuesax)
 
 import { BootstrapVue } from 'bootstrap-vue'
+import {
+  ValidationObserver,
+  ValidationProvider,
+  extend,
+  localize
+} from "vee-validate";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 // import './app.scss'
+Object.keys(rules).forEach(rule => {
+  extend(rule, rules[rule]);
+});
+
+Vue.component("ValidationObserver", ValidationObserver);
+Vue.component("ValidationProvider", ValidationProvider);
+
 
 Vue.use(BootstrapVue)
+
+// import en from "vee-validate/dist/locale/en.json";
+import * as rules from "vee-validate/dist/rules";
+// import App from "./App";
+
+// Install VeeValidate rules and localization
 
 
 // axios

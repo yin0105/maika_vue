@@ -8,12 +8,16 @@
 ==========================================================================================*/
 @import '../_variables.scss';
 
-input.my-bootstrap {
+.form-control {
     color: $text-color-1 !important;
     line-height: 28px !important;
+    height: 44px !important;
 }
 
-label.my-bootstrap {
-    color: $text-color-1 !important;
-    line-height: 19px !important;
+.form-group {
+    label {
+        line-height: 19px;
+        margin-bottom: 8px;
+        color: $text-color-1 !important;
+    }
 }
