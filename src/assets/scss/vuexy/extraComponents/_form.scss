@@ -55,8 +55,10 @@
     }
 }
 
-.f-24 {
-    font-size: 24px !important;
+.f-13-16 {
+    font-size: 13px;
+    line-height: 16px;
+    color: $text-color-2;
 }
 
 .f-16-28 {
@@ -74,6 +76,20 @@
     line-height: 29px !important;
     color: $black !important;
     font-weight: 700 !important;
+}
+
+.f-24-29-400 {
+    font-size: 24px !important;
+    line-height: 29px !important;
+    color: $black !important;
+    font-weight: 400 !important;
+}
+
+.f-28-34 {
+    font-size: 28px;
+    line-height: 34px;
+    color: $black;
+    font-weight: 700;
 }
 
 .h-29 {

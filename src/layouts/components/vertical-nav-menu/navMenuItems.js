@@ -34,9 +34,9 @@ export default [
     i18n: 'Menu',
     items: [
       {
-        url: '/routines',
+        url: '/',
         name: 'Dashboard',
-        slug: 'routines',
+        slug: 'dashboard',
         icon: 'home',
         i18n: 'Dashboard'
       },
@@ -55,11 +55,10 @@ export default [
         i18n: 'Users'
       },
       {
-        url: '/routines',
+        url: '/devices',
         name: 'Devices',
-        slug: '/routines',
+        slug: 'devices',
         icon: 'settings',
-        tagColor: 'success',
         i18n: 'Devices'
       },
       // {
