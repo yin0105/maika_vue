@@ -1,11 +1,3 @@
-/*=========================================================================================
-    File Name: _button.scss
-    Description: Styles for button.
-    ----------------------------------------------------------------------------------------
-    Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
-      Author: Pixinvent
-    Author URL: http://www.themeforest.net/user/pixinvent
-==========================================================================================*/
 @import '../_variables.scss';
 
 
@@ -34,6 +26,11 @@
 }
 
 .select-with-image {
+    .vs__dropdown-option {
+        line-height: 28px;
+        height: 44px;
+        align-items: center;
+    }
     .vs__dropdown-toggle {
         height: 41px;
     }
@@ -47,12 +44,24 @@
     input {
         display: none;
     }
+    input[placeholder] {
+        display: block !important;
+    }
     li {
         display: flex !important;
         img {
             margin-right: 20px !important;
         }
     }
+}
+
+.f-24 {
+    font-size: 24px !important;
+}
+
+.f-16-28 {
+    font-size: 16px !important;
+    line-height: 28px !important;
 }
 
 .f-18-22 {
@@ -75,21 +84,75 @@
     color: $text-color-1;
 }
 
+.c-2 {
+    color: $text-color-2;
+}
+
 .c-b {
     color: $blue;
 }
 
-.pretty input:checked ~ .state.p-my-primary {
-    svg {
-        color: $primary !important;
+.ml-px-10 {
+    margin-left: 10px !important;
+}
+
+.pretty {
+    font-size: 22px;
+    margin-right: 10px !important;
+
+    .state.p-my-primary {
+        font-size: 14px !important;
     }
-    .icon {
-        color: $primary !important;
-        stroke: $primary !important;
+    
+    input:checked ~ .state{
+        svg {
+            color: $check-border !important;
+        }
+        .icon {
+            color: $check-border !important;
+        }
+
+        &.p-my-primary {
+            width: 16px !important;
+            font-size: 16px;
+
+            svg {
+                color: $primary !important;
+            }
+            .icon {
+                color: $primary !important;
+            }
+        }
+    }
+    
+    &.p-icon input:checked ~ .state {
+        width: 16px !important;
+        font-size: 16px;
+
+        label:before {
+            border-color: $check-border !important;
+            border-radius: 3px !important;
+        }
+
+        &.p-my-primary {
+            border-color: $primary !important;
+            border-radius: 2px !important;
+        }
+    }
+    
+    .state {
+        label:before {
+            border-color: $check-border !important;
+            border-radius: 3px !important;
+        }
+
+        &.p-my-primary {
+            label:before {
+                border-color: $primary !important;
+                border-radius: 2px !important;
+            }
+        }
     }
 }
 
-.pretty.p-icon input:checked ~ .state label:before {
-    border-color: $primary !important;
-    border-radius: 2px !important;
-}
+

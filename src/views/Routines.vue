@@ -32,7 +32,7 @@
           <vx-card title="Trigger Condition" class="mb-base pr-12">
             <div class="w-full flex items-center">
               <span class="text-nowrap mr-8 f-18-22 c-1">Via Device</span>
-              <v-select :options="options" label="title" class="select-with-image w-full">
+              <v-select :options="devices" label="title" class="select-with-image w-full">
                 <template slot="option" slot-scope="option">
                     <img :src="option.image" width="22px" height="22px"/>{{ option.title }}
                 </template>
@@ -42,65 +42,80 @@
               </v-select>
             </div>
 
-            <div class="f-18-22 h-29 mt-4 c-1">
-              when <span class="c-b">Lí Nguyễn</span>
+            <div class="f-18-22 h-29 mt-4 c-1 flex items-center">
+              when <span class="c-b ml-2">Lí Nguyễn</span>
             </div>
 
-            <div>
-              <p-check name="check" color="success" v-model="check">Check</p-check>
-              <p-check class="p-svg p-curve" color="success">
-                <!-- svg path -->
-                <svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0.387465 5.60626C-0.129155 5.12354 -0.129155 4.3409 0.387465 3.85818C0.904084 3.37547 1.74169 3.37547 2.25831 3.85818L3.94207 5.43145C4.04539 5.52799 4.21292 5.52799 4.31624 5.43145L9.74169 0.362038C10.2583 -0.120679 11.0959 -0.120679 11.6125 0.362038C12.1292 0.844755 12.1292 1.62739 11.6125 2.11011L4.31624 8.92759C4.21292 9.02414 4.04539 9.02414 3.94207 8.92759L0.387465 5.60626Z" fill="#3A57E8"/>
-                </svg>
-                Recurring
-            </p-check>
-             <p-check class="p-svg p-plain">
-                <svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0.387465 5.60626C-0.129155 5.12354 -0.129155 4.3409 0.387465 3.85818C0.904084 3.37547 1.74169 3.37547 2.25831 3.85818L3.94207 5.43145C4.04539 5.52799 4.21292 5.52799 4.31624 5.43145L9.74169 0.362038C10.2583 -0.120679 11.0959 -0.120679 11.6125 0.362038C12.1292 0.844755 12.1292 1.62739 11.6125 2.11011L4.31624 8.92759C4.21292 9.02414 4.04539 9.02414 3.94207 8.92759L0.387465 5.60626Z" fill="#3A57E8"/>
-                </svg>
-                Done
-            </p-check>
-
-             <p-check class="pretty p-image p-plain">
-                <svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0.387465 5.60626C-0.129155 5.12354 -0.129155 4.3409 0.387465 3.85818C0.904084 3.37547 1.74169 3.37547 2.25831 3.85818L3.94207 5.43145C4.04539 5.52799 4.21292 5.52799 4.31624 5.43145L9.74169 0.362038C10.2583 -0.120679 11.0959 -0.120679 11.6125 0.362038C12.1292 0.844755 12.1292 1.62739 11.6125 2.11011L4.31624 8.92759C4.21292 9.02414 4.04539 9.02414 3.94207 8.92759L0.387465 5.60626Z" fill="#3A57E8"/>
-                </svg>
-                Agree
-            </p-check>
-
-              <p-check class="p-icon p-round p-smooth" color="success">
+            <div class="flex" style="margin-top: 18px; margin-bottom: 14px;">
+              <div class="flex items-center">
+                <p-check class="p-icon p-smooth" color="my-primary">
                   <i slot="extra" class="icon mdi mdi-check">
-                  <feather-icon icon="XIcon" svgClasses="h-4 w-4 cursor-pointer text-danger" class="hover:text-danger"/>
+                    <feather-icon icon="CheckIcon" svgClasses="h-4 w-4 cursor-pointer text-success" class="hover:text-danger"/>
                   </i>
-                  Tuesday
-              </p-check>
+                </p-check>
+              </div>
+              <img :src="require('@/assets/images/svg/recognize-face-camera.svg')"/>
+              <span class="f-16-28 c-2 ml-px-10">is recognized with face by camera</span>
+            </div>
 
-              <p-check class="p-icon p-smooth" color="my-primary">
-                  <!-- <i slot="extra" class="icon mdi mdi-close"></i> -->
+            <div class="flex">
+              <div class="flex items-center">
+                <p-check class="p-icon p-smooth" color="my-primary">
                   <i slot="extra" class="icon mdi mdi-check">
-                  <feather-icon icon="CheckIcon" svgClasses="h-4 w-4 cursor-pointer text-success" class="hover:text-danger"/>
+                    <feather-icon icon="CheckIcon" svgClasses="h-4 w-4 cursor-pointer text-success" class="hover:text-danger"/>
                   </i>
-                  Wednesday
-              </p-check>
+                </p-check>
+              </div>
+              <img :src="require('@/assets/images/svg/raise-either-hand-up.svg')"/>
+              <span class="f-16-28 c-2 ml-px-10">raises either hand up</span>
             </div>
 
-            <!-- <div class="w-full flex">
-              <input type="checkbox">
+            <div class="f-24-29" style="margin-top: 27px; margin-bottom: 18px;">
+              Actions to take
             </div>
 
-            <label class="checkbox">
-              <input type="checkbox" />
-              <span>Check Me</span>
-            </label> -->
+            <div class="w-full flex items-center">
+              <span class="text-nowrap mr-8 f-18-22 c-1">#1 Action</span>
+              <v-select :options="actions" placeholder="select action to take" label="title" class="select-with-image w-full">
+                <template slot="option" slot-scope="option">
+                    <img :src="option.image" width="22px" height="22px"/>{{ option.title }}
+                </template>
+                <template slot="selected-option" slot-scope="option" :value="option.level">
+                  <img :src="option.image" width="22px" height="22px" />{{ option.title }}
+                </template>
+              </v-select>
+            </div>
           </vx-card>
         </div>
 
         <div class="lg:col-span-5">    
           <vx-card title="All Routines" class="mb-base">
-            <div class="grid grid-cols-2">
-                  asdaf          
-            </div>            
+            <div class="grid grid-cols-9 gap-8 mb-1">
+              <div class="col-span-1 flex items-center">
+                <p-check class="p-icon p-smooth ml-6">
+                  <i slot="extra" class="icon mdi mdi-check">
+                    <feather-icon icon="CheckIcon" svgClasses="h-4 w-4 cursor-pointer text-success" class="hover:text-danger"/>
+                  </i>
+                </p-check>
+              </div>
+              <div class="col-span-4">              
+                <vs-input icon-pack="feather" icon="icon-search" placeholder="Search By User name" icon-no-border class="w-full"/>
+              </div>
+              <div class="col-span-2">              
+                <v-select :options="['foo','bar']" placeholder="Filter by" />
+              </div>
+              <div class="col-span-2">              
+                <v-select :options="['foo','bar']" placeholder="Actions" />
+              </div>              
+            </div>
+
+            <div class="mb-12">
+              <ul class="mt-8">
+                <li class="cursor-pointer" v-for="(contact, index) in contacts" :key="index">
+                  <routine-row :contact="contact"/>
+                </li>
+              </ul>
+            </div>             
           </vx-card>
         </div>
       </div>
@@ -111,6 +126,7 @@
 import moduleUserManagement from '@/store/user-management/moduleUserManagement.js'
 import vSelect from 'vue-select'
 import UserItem from '../components/UserItem.vue'
+import RoutineRow from '../components/RoutineRow.vue'
 import moduleChat          from '@/store/chat/moduleChat.js'
 import { contacts } from './data'
 
@@ -123,21 +139,43 @@ export default {
       contacts: contacts,
       narrow: true,
       reconigedByCamera: true,
-      options: [
+      devices: [
                 {
-                  level: 1,
+                  value: 0,
                   title:"Camera HANET - Entry Door",
                   image: require('@/assets/images/svg/camera.svg')
                 },
                 {
-                  level: 2,
+                  value: 1,
                   title:"Image 2",
                   image: require('@/assets/images/portrait/small/avatar-s-5.jpg')
                 },
                 {
-                  level: 3,
+                  value: 2,
                   title:"Image 3",
                   image: require('@/assets/images/portrait/small/avatar-s-4.jpg')
+                }
+              ],
+      actions: [
+                {
+                  value: 0,
+                  title:"MAIKA respond",
+                  image: require('@/assets/images/svg/maika-respond.svg')
+                },
+                {
+                  value: 1,
+                  title:"Play Sound effect",
+                  image: require('@/assets/images/svg/play-sound-effect.svg')
+                },
+                {
+                  value: 2,
+                  title:"Control IoT device",
+                  image: require('@/assets/images/svg/control-iot-device.svg')
+                },
+                {
+                  value: 3,
+                  title:"Remind to-do list",
+                  image: require('@/assets/images/svg/remind-to-do-list.svg')
                 }
               ],
     }
@@ -217,7 +255,8 @@ export default {
   // },
   components: {
     'v-select': vSelect,
-    'user-item': UserItem
+    'user-item': UserItem,
+    'routine-row': RoutineRow
   }
 }
 
@@ -251,33 +290,12 @@ export default {
   margin-left: 17px;
   margin-right: 17px;
 }
-// #account-info-col-1 {
-//   // flex-grow: 1;
-//   width: 30rem !important;
-//   @media screen and (min-width:1200px) {
-//     & {
-//       flex-grow: unset !important;
-//     }
-//   }
-// }
-
 
 @media screen and (min-width:1201px) and (max-width:1211px),
 only screen and (min-width:636px) and (max-width:991px) {
   #account-info-col-1 {
     width: calc(100% - 12rem) !important;
   }
-
-  // #account-manage-buttons {
-  //   width: 12rem !important;
-  //   flex-direction: column;
-
-  //   > button {
-  //     margin-right: 0 !important;
-  //     margin-bottom: 1rem;
-  //   }
-  // }
-
 }
 
 </style>
