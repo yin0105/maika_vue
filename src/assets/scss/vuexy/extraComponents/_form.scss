@@ -8,6 +8,7 @@
 ==========================================================================================*/
 @import '../_variables.scss';
 
+
 .form-control {
     color: $text-color-1 !important;
     line-height: 28px !important;
@@ -22,7 +23,7 @@
     }
 }
 
-.vx-card.narrow {
+.vx-card.px0 {
     padding-left: 0px !important;
     padding-right: 0px !important;
     
@@ -30,4 +31,65 @@
         padding-left: 16px !important;
         padding-right: 16px !important;
     }
+}
+
+.select-with-image {
+    .vs__dropdown-toggle {
+        height: 41px;
+    }
+    span {
+        line-height: 28px;
+        img {
+            margin-right: 23px;
+            margin-left: 12px;
+        }
+    }
+    input {
+        display: none;
+    }
+    li {
+        display: flex !important;
+        img {
+            margin-right: 20px !important;
+        }
+    }
+}
+
+.f-18-22 {
+    font-size: 18px !important;
+    line-height: 22px !important;    
+}
+
+.f-24-29 {
+    font-size: 24px !important;
+    line-height: 29px !important;
+    color: $black !important;
+    font-weight: 700 !important;
+}
+
+.h-29 {
+    height: 29px !important;
+}
+
+.c-1 {
+    color: $text-color-1;
+}
+
+.c-b {
+    color: $blue;
+}
+
+.pretty input:checked ~ .state.p-my-primary {
+    svg {
+        color: $primary !important;
+    }
+    .icon {
+        color: $primary !important;
+        stroke: $primary !important;
+    }
+}
+
+.pretty.p-icon input:checked ~ .state label:before {
+    border-color: $primary !important;
+    border-radius: 2px !important;
 }

@@ -3,19 +3,19 @@
 
     <div id="user-data" class="grid lg:grid-cols-11 lg:gap-10">
         <div class="lg:col-span-2">    
-          <vx-card title="Users/Location" class="mb-base narrow">
+          <vx-card title="Users/Location" class="mb-base px0">
             <div class="sub-title px-4">
                 Type of targeted entity
             </div>  
             <v-select :options="['User','Location']" class="px-4" />
             <div v-if="targetedEntityType == 'User'"  class="px-4 flex mt-6 items-center">
-                <span class="w-2/5">Filter by</span>
+                <span class="w-2/5 c-1">Filter by</span>
                 <v-select :options="['User','Location']" class="w-3/5 "/>
             </div>
             <div class="mt-8 mb-2">
               <ul>
                 <li class="cursor-pointer" v-for="(contact, index) in contacts" :key="index">
-                  <user-item :contact="contact" narrow="true"/>
+                  <user-item :contact="contact" :narrow="narrow"/>
                 </li>
               </ul>
             </div>
@@ -27,12 +27,72 @@
             </div>
           </vx-card>
         </div>
-
+<!-- 2nd Column -->
         <div class="lg:col-span-4">    
-          <vx-card title="Trigger Condition" class="mb-base">
-            <div class="grid grid-cols-2">
-                  asdaf          
-            </div>            
+          <vx-card title="Trigger Condition" class="mb-base pr-12">
+            <div class="w-full flex items-center">
+              <span class="text-nowrap mr-8 f-18-22 c-1">Via Device</span>
+              <v-select :options="options" label="title" class="select-with-image w-full">
+                <template slot="option" slot-scope="option">
+                    <img :src="option.image" width="22px" height="22px"/>{{ option.title }}
+                </template>
+                <template slot="selected-option" slot-scope="option" :value="option.level">
+                  <img :src="option.image" width="22px" height="22px" />{{ option.title }}
+                </template>
+              </v-select>
+            </div>
+
+            <div class="f-18-22 h-29 mt-4 c-1">
+              when <span class="c-b">Lí Nguyễn</span>
+            </div>
+
+            <div>
+              <p-check name="check" color="success" v-model="check">Check</p-check>
+              <p-check class="p-svg p-curve" color="success">
+                <!-- svg path -->
+                <svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0.387465 5.60626C-0.129155 5.12354 -0.129155 4.3409 0.387465 3.85818C0.904084 3.37547 1.74169 3.37547 2.25831 3.85818L3.94207 5.43145C4.04539 5.52799 4.21292 5.52799 4.31624 5.43145L9.74169 0.362038C10.2583 -0.120679 11.0959 -0.120679 11.6125 0.362038C12.1292 0.844755 12.1292 1.62739 11.6125 2.11011L4.31624 8.92759C4.21292 9.02414 4.04539 9.02414 3.94207 8.92759L0.387465 5.60626Z" fill="#3A57E8"/>
+                </svg>
+                Recurring
+            </p-check>
+             <p-check class="p-svg p-plain">
+                <svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0.387465 5.60626C-0.129155 5.12354 -0.129155 4.3409 0.387465 3.85818C0.904084 3.37547 1.74169 3.37547 2.25831 3.85818L3.94207 5.43145C4.04539 5.52799 4.21292 5.52799 4.31624 5.43145L9.74169 0.362038C10.2583 -0.120679 11.0959 -0.120679 11.6125 0.362038C12.1292 0.844755 12.1292 1.62739 11.6125 2.11011L4.31624 8.92759C4.21292 9.02414 4.04539 9.02414 3.94207 8.92759L0.387465 5.60626Z" fill="#3A57E8"/>
+                </svg>
+                Done
+            </p-check>
+
+             <p-check class="pretty p-image p-plain">
+                <svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0.387465 5.60626C-0.129155 5.12354 -0.129155 4.3409 0.387465 3.85818C0.904084 3.37547 1.74169 3.37547 2.25831 3.85818L3.94207 5.43145C4.04539 5.52799 4.21292 5.52799 4.31624 5.43145L9.74169 0.362038C10.2583 -0.120679 11.0959 -0.120679 11.6125 0.362038C12.1292 0.844755 12.1292 1.62739 11.6125 2.11011L4.31624 8.92759C4.21292 9.02414 4.04539 9.02414 3.94207 8.92759L0.387465 5.60626Z" fill="#3A57E8"/>
+                </svg>
+                Agree
+            </p-check>
+
+              <p-check class="p-icon p-round p-smooth" color="success">
+                  <i slot="extra" class="icon mdi mdi-check">
+                  <feather-icon icon="XIcon" svgClasses="h-4 w-4 cursor-pointer text-danger" class="hover:text-danger"/>
+                  </i>
+                  Tuesday
+              </p-check>
+
+              <p-check class="p-icon p-smooth" color="my-primary">
+                  <!-- <i slot="extra" class="icon mdi mdi-close"></i> -->
+                  <i slot="extra" class="icon mdi mdi-check">
+                  <feather-icon icon="CheckIcon" svgClasses="h-4 w-4 cursor-pointer text-success" class="hover:text-danger"/>
+                  </i>
+                  Wednesday
+              </p-check>
+            </div>
+
+            <!-- <div class="w-full flex">
+              <input type="checkbox">
+            </div>
+
+            <label class="checkbox">
+              <input type="checkbox" />
+              <span>Check Me</span>
+            </label> -->
           </vx-card>
         </div>
 
@@ -61,6 +121,25 @@ export default {
       user_not_found: false,
       targetedEntityType: 'User',
       contacts: contacts,
+      narrow: true,
+      reconigedByCamera: true,
+      options: [
+                {
+                  level: 1,
+                  title:"Camera HANET - Entry Door",
+                  image: require('@/assets/images/svg/camera.svg')
+                },
+                {
+                  level: 2,
+                  title:"Image 2",
+                  image: require('@/assets/images/portrait/small/avatar-s-5.jpg')
+                },
+                {
+                  level: 3,
+                  title:"Image 3",
+                  image: require('@/assets/images/portrait/small/avatar-s-4.jpg')
+                }
+              ],
     }
   },
   computed: {

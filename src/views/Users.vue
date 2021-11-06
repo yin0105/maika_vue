@@ -111,13 +111,14 @@
                     <div class="lg:col-span-6">
                       <validation-provider
                           name="Email"
-                          :rules="{ required: true, min: 2 }"
+                          :rules="{ required: true, min: 2, email: true }"
                           v-slot="validationContext"
                         >
                           <b-form-group label="Email" label-for="email">
                             <b-form-input
                               id="email"
                               name="email"
+                              type="email"
                               v-model="form.email"
                               :state="getValidationState(validationContext)"
                               aria-describedby="email-live-feedback"

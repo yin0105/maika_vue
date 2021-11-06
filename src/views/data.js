@@ -34,41 +34,41 @@ export const contacts = [
           photoURL: require('@/assets/images/portrait/small/avatar-s-5.jpg'),
           status: 'do not disturb'
         },
-        // {
-        //   uid: 6,
-        //   displayName: 'Sal Piggee',
-        //   position: 'Principle Engineer',
-        //   photoURL: require('@/assets/images/portrait/small/avatar-s-6.jpg'),
-        //   status: 'online'
-        // },
-        // {
-        //   uid: 7,
-        //   displayName: 'Miguel Guelff',
-        //   position: 'Principle Engineer',
-        //   photoURL: require('@/assets/images/portrait/small/avatar-s-7.jpg'),
-        //   status: 'online'
-        // },
-        // {
-        //   uid: 8,
-        //   displayName: 'Mauro Elenbaas',
-        //   position: 'Principle Engineer',
-        //   photoURL: require('@/assets/images/portrait/small/avatar-s-8.jpg'),
-        //   status: 'away'
-        // },
-        // {
-        //   uid: 9,
-        //   displayName: 'Bridgett Omohundro',
-        //   position: 'Principle Engineer',
-        //   photoURL: require('@/assets/images/portrait/small/avatar-s-9.jpg'),
-        //   status: 'offline'
-        // },
-        // {
-        //   uid: 10,
-        //   displayName: 'Zenia Jacobs',
-        //   position: 'Principle Engineer',
-        //   photoURL: require('@/assets/images/portrait/small/avatar-s-10.jpg'),
-        //   status: 'away'
-        // }
+        {
+          uid: 6,
+          displayName: 'Sal Piggee',
+          position: 'Principle Engineer',
+          photoURL: require('@/assets/images/portrait/small/avatar-s-6.jpg'),
+          status: 'online'
+        },
+        {
+          uid: 7,
+          displayName: 'Miguel Guelff',
+          position: 'Principle Engineer',
+          photoURL: require('@/assets/images/portrait/small/avatar-s-7.jpg'),
+          status: 'online'
+        },
+        {
+          uid: 8,
+          displayName: 'Mauro Elenbaas',
+          position: 'Principle Engineer',
+          photoURL: require('@/assets/images/portrait/small/avatar-s-8.jpg'),
+          status: 'away'
+        },
+        {
+          uid: 9,
+          displayName: 'Bridgett Omohundro',
+          position: 'Principle Engineer',
+          photoURL: require('@/assets/images/portrait/small/avatar-s-9.jpg'),
+          status: 'offline'
+        },
+        {
+          uid: 10,
+          displayName: 'Zenia Jacobs',
+          position: 'Principle Engineer',
+          photoURL: require('@/assets/images/portrait/small/avatar-s-10.jpg'),
+          status: 'away'
+        }
       ];
 
       const data = {
