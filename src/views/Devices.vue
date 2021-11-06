@@ -17,6 +17,10 @@
             <div v-for="device in devices" class="col-span-2">
                 <device-card :device="device" />
             </div>
+
+            <div class="col-span-2">
+                <device-card :device="{type: 'add_btn'}" />
+            </div>
         </div>
   </div>
 </template>

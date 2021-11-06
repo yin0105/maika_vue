@@ -324,28 +324,7 @@ export default {
     svg {
       margin-right: 19px;
     }
-  }
-
-  .bottom-btn {
-    font-family: SF Pro Text;
-    font-size: 14px;
-    line-height: 17px;
-    border-radius: 5px;
-    height: 41px;
-    font-weight: 600;
-    &.create {
-      padding: 8px 35px 8px 10px;
-      svg {
-        width: 20px;
-        height: 20px;
-        margin-right: 10px;
-      }
-    }
-    &.back {
-      padding: 8px 24px 8px 24px;
-    }
-    
-  }
+  }  
 
   @media screen and (min-width:1201px) and (max-width:1211px),
   only screen and (min-width:636px) and (max-width:991px) {

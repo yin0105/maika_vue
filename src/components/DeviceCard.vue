@@ -1,6 +1,17 @@
 <template>
     <vx-card>
-        <div class="device-card">
+        <div v-if="device.type == 'add_btn'" class="device-card add_btn">
+            <div class="flex justify-content-center">
+                <b-button class="new-device">
+                    <img :src="require('@/assets/images/svg/plus-circle-new-device.svg')">
+                    <!-- <img :src="require('@/assets/images/svg/recognize-face-camera.svg')"/> -->
+                </b-button>
+            </div>
+            <div class="f-24-29-400 flex justify-content-center">
+                New Device
+            </div>
+        </div>
+        <div v-else class="device-card">
             <div>
                 <img :src="device.image" height="109px" class="mx-auto">
             </div>
@@ -22,11 +33,27 @@
 
 <style>
     .device-card {
-        padding: 2px 8px !important;
+        padding: 2px 8px !important;        
+    }
+
+    .device-card.add_btn {
+        padding-top: 70px !important;
+        padding-bottom: 40px !important;
     }
 
     .vx-card__body {
         padding-top: 0px !important;
+    }
+
+    button.new-device {
+        width: 97px;
+        height: 97px;
+        background-color: transparent !important;
+        border: none;
+        padding: 0px; 
+        /* border-radius: 50%;
+        background-color: #375CE8 !important;
+        font-size: 32px; */
     }
 </style>
 
