@@ -2,7 +2,7 @@
     <div id="devices-main-panel">
         <div class="flex grid lg:grid-cols-12 lg:gap-x-10">
             <div class="flex col-span-12 mt-4">
-                <b-button variant="primary" class="bottom-btn create flex items-center mr-8">
+                <b-button variant="success" class="bottom-btn create flex items-center mr-8">
                     <feather-icon icon="PlusCircleIcon"/>
                     NEW LOCATION
                 </b-button>
@@ -71,6 +71,18 @@ export default {
     .f-28-34 {
         margin-top: 37px;
         margin-bottom: 17px;
+    }
+
+    button svg {
+        margin-right: 10px;
+    }
+
+    .btn-secondary:not(.bottom-btn) {
+        background-color: #1AA053;
+    }
+
+    .btn-primary {
+        background-color: #0A65FF;
     }
 </style>
 
