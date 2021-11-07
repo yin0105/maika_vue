@@ -126,6 +126,8 @@
       </div>
       <!-- <the-footer /> -->
     </div>
+
+    <!-- <Overlay /> -->
   </div>
 </template>
 
@@ -140,6 +142,8 @@ import TheNavbarVertical   from '@/layouts/components/navbar/TheNavbarVertical.v
 import TheFooter           from '@/layouts/components/TheFooter.vue'
 import themeConfig         from '@/../themeConfig.js'
 import VNavMenu            from '@/layouts/components/vertical-nav-menu/VerticalNavMenu.vue'
+import Overlay            from '@/components/Overlay.vue'
+
 
 // const VxTour = () => import('@/components/VxTour.vue')
 
@@ -152,7 +156,8 @@ export default {
     TheNavbarHorizontal,
     TheNavbarVertical,
     VNavMenu,
-    // VxTour
+    // VxTour,
+    Overlay,
   },
   data () {
     return {

@@ -14,7 +14,7 @@
             <div class="f-28-34 col-span-12">
                 @ MAIN OFFICE
             </div> 
-            <div v-for="device in devices" class="col-span-2">
+            <div v-for="device in devices" :key="device.value" class="col-span-2">
                 <device-card :device="device" />
             </div>
 
@@ -22,7 +22,9 @@
                 <device-card :device="{type: 'add_btn'}" />
             </div>
         </div>
-  </div>
+        <overlay :disp="overlay_disp"/>
+        <create-new-location />        
+    </div>
 </template>
 
 <script>
@@ -33,10 +35,13 @@ import RoutineRow from '../components/RoutineRow.vue'
 import moduleChat          from '@/store/chat/moduleChat.js'
 import { contacts } from './data'
 import DeviceCard from '../components/DeviceCard.vue'
+import Overlay from '../components/Overlay.vue'
+import CreateNewLocation from '../components/CreateNewLocation.vue'
 
 export default {
   data () {
     return {
+        overlay_disp: false,
         devices: [
                     {
                         value: 0,
@@ -66,6 +71,8 @@ export default {
   
   components: {
       'device-card': DeviceCard,
+      'overlay': Overlay,
+      'create-new-location': CreateNewLocation,
   }
 }
 
