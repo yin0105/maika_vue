@@ -2,11 +2,11 @@
     <div id="devices-main-panel">
         <div class="flex grid lg:grid-cols-12 lg:gap-x-10">
             <div class="flex col-span-12 mt-4">
-                <b-button variant="success" class="bottom-btn create flex items-center mr-8">
+                <b-button variant="success" class="bottom-btn create flex items-center mr-8" @click="show_popup_location">
                     <feather-icon icon="PlusCircleIcon"/>
                     NEW LOCATION
                 </b-button>
-                <b-button variant="primary" class="bottom-btn create flex items-center ml-1">
+                <b-button variant="primary" class="bottom-btn create flex items-center ml-1" @click="show_popup_device">
                     <feather-icon icon="PlusCircleIcon"/>
                     NEW DEVICE
                 </b-button>
@@ -15,15 +15,15 @@
                 @ MAIN OFFICE
             </div> 
             <div v-for="device in devices" :key="device.value" class="col-span-2">
-                <device-card :device="device" />
+                <device-card :_device="device" />
             </div>
 
             <div class="col-span-2">
-                <device-card :device="{type: 'add_btn'}" />
+                <device-card :_device="{type: 'add_btn'}" v-bind.sync="disp_popup" />
             </div>
         </div>
-        <overlay :disp="overlay_disp"/>
-        <create-new-location />        
+        <create-new-location :disp="disp_popup.location" v-bind.sync="disp_popup"/>
+        <create-new-device :disp="disp_popup.device" v-bind.sync="disp_popup"/>        
     </div>
 </template>
 
@@ -37,11 +37,15 @@ import { contacts } from './data'
 import DeviceCard from '../components/DeviceCard.vue'
 import Overlay from '../components/Overlay.vue'
 import CreateNewLocation from '../components/CreateNewLocation.vue'
+import CreateNewDevice from '../components/CreateNewDevice.vue'
 
 export default {
   data () {
     return {
-        overlay_disp: false,
+        disp_popup: {
+            location: false,
+            device: false,
+        },
         devices: [
                     {
                         value: 0,
@@ -73,6 +77,25 @@ export default {
       'device-card': DeviceCard,
       'overlay': Overlay,
       'create-new-location': CreateNewLocation,
+      'create-new-device': CreateNewDevice,
+  },
+
+  methods: {
+    show_popup_location() {
+        this.disp_popup.location = true
+    },
+    show_popup_device() {
+        this.disp_popup.device = true
+    },
+  },
+  
+  watch: {
+      disp_popup: {
+                handler: function (new_disp_popup) {
+                    console.log("== new: ", new_disp_popup)
+                },
+                deep: true,
+            },
   }
 }
 

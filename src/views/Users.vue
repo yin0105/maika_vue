@@ -5,7 +5,14 @@
           <vx-card title="Users" class="mb-base">
             <div class="grid grid-cols-11 gap-8">
               <div class="col-span-5">              
-                <vs-input icon-pack="feather" icon="icon-search" placeholder="Search By User name" icon-no-border class="w-full"/>
+                <!-- <vs-input icon-pack="feather" icon="icon-search" placeholder="Search By User name" icon-no-border class="w-full"/>
+                <vs-input placeholder="Search By User name" class="w-full"/>
+                <b-input-group>
+                  <b-form-input class="LoginInput" size="lg" placeholder="Username">
+                  </b-form-input>
+                  <feather-icon icon="PlusCircleIcon" style="position:"/>
+                </b-input-group> -->
+                <search-field placeholder="Search by User name" />
               </div>
               <div class="col-span-3">              
                 <v-select :options="['foo','bar']" placeholder="Filter by" />
@@ -200,6 +207,7 @@
 import moduleUserManagement from '@/store/user-management/moduleUserManagement.js'
 import vSelect from 'vue-select'
 import UserItem from '../components/UserItem.vue'
+import SearchField from '../components/SearchField.vue'
 import moduleChat          from '@/store/chat/moduleChat.js'
 import VueCoreImageUpload  from 'vue-core-image-upload';
 import { contacts } from './data'
@@ -276,6 +284,7 @@ export default {
     'v-select': vSelect,
     'user-item': UserItem,
     'vue-core-image-upload': VueCoreImageUpload,
+    'search-field': SearchField,
   }
 }
 
@@ -332,6 +341,8 @@ export default {
       width: calc(100% - 12rem) !important;
     }
   }
+
+  
 
 </style>
 

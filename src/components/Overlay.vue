@@ -17,6 +17,12 @@
         backdrop-filter: blur(5.44px);
         z-index: 60000;    
     }
+
+    @media (max-width: 1200px) {
+        .overlay {
+            left: 0px !important;
+        }
+    }
 </style>
 
 <script>

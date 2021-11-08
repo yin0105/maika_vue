@@ -74,20 +74,23 @@
               Actions to take
             </div>
 
-            <div class="w-full flex items-center">
-              <span class="text-nowrap mr-8 f-18-22 c-1">#1 Action</span>
-              <v-select :options="actions" placeholder="select action to take" label="title" class="select-with-image w-full">
-                <template slot="option" slot-scope="option">
-                    <img :src="option.image" width="22px" height="22px"/>{{ option.title }}
-                </template>
-                <template slot="selected-option" slot-scope="option" :value="option.level">
-                  <img :src="option.image" width="22px" height="22px" />{{ option.title }}
-                </template>
-              </v-select>
+            <div>
+              <action-row v-for="(action, index) in actions" :actionIndex="index" :actionType="action.action" :key="index" v-bind.sync="reaction" />
+            </div>
+
+            <div class="mt-20 flex justify-between">
+                <b-button variant="" class="bottom-btn back create flex items-center" @click="addAction">
+                    ADD
+                </b-button>
+                <b-button variant="success" class="bottom-btn create flex items-center" @click="create">
+                    <feather-icon icon="PlusCircleIcon"/>
+                    CREATE
+                </b-button>
             </div>
           </vx-card>
         </div>
 
+<!-- 3rd Column -->
         <div class="lg:col-span-5">    
           <vx-card title="All Routines" class="mb-base">
             <div class="grid grid-cols-9 gap-8 mb-1">
@@ -99,7 +102,8 @@
                 </p-check>
               </div>
               <div class="col-span-4">              
-                <vs-input icon-pack="feather" icon="icon-search" placeholder="Search By User name" icon-no-border class="w-full"/>
+                <!-- <vs-input icon-pack="feather" icon="icon-search" placeholder="Search By User name" icon-no-border class="w-full"/> -->
+                <search-field placeholder="Search by User name" />
               </div>
               <div class="col-span-2">              
                 <v-select :options="['foo','bar']" placeholder="Filter by" />
@@ -129,8 +133,10 @@ import UserItem from '../components/UserItem.vue'
 import RoutineRow from '../components/RoutineRow.vue'
 import moduleChat          from '@/store/chat/moduleChat.js'
 import { contacts } from './data'
+import ActionRow from '../components/ActionRow.vue'
+import SearchField from '../components/SearchField.vue'
 
-export default {
+export default {  
   data () {
     return {
       user_data: null,
@@ -157,66 +163,71 @@ export default {
                 }
               ],
       actions: [
-                {
-                  value: 0,
-                  title:"MAIKA respond",
-                  image: require('@/assets/images/svg/maika-respond.svg')
-                },
-                {
-                  value: 1,
-                  title:"Play Sound effect",
-                  image: require('@/assets/images/svg/play-sound-effect.svg')
-                },
-                {
-                  value: 2,
-                  title:"Control IoT device",
-                  image: require('@/assets/images/svg/control-iot-device.svg')
-                },
-                {
-                  value: 3,
-                  title:"Remind to-do list",
-                  image: require('@/assets/images/svg/remind-to-do-list.svg')
-                }
-              ],
+        {
+          action: -1,
+        }
+      ],
+      reaction: {
+        remove: -1,
+        change: -1,
+        changeAction: -1,    
+      }     
     }
   },
   computed: {
-    userAddress () {
-      let str = ''
-      for (const field in this.user_data.location) {
-        str += `${field  } `
-      }
-      return str
-    }
+  },
+  watch: {
+    reaction: {
+      handler: function (newReaction) {
+        if (newReaction.remove > -1) {
+          this.actions.splice(newReaction.remove, 1)
+          newReaction.remove = -1
+        }
+
+        if (newReaction.change > -1) {
+          this.actions[newReaction.change].action = newReaction.changeAction
+          console.log(this.actions)
+          newReaction.change = -1
+          newReaction.changeAction = -1
+        }
+      },
+      deep: true,
+    },
   },
   methods: {
-    confirmDeleteRecord () {
-      this.$vs.dialog({
-        type: 'confirm',
-        color: 'danger',
-        title: 'Confirm Delete',
-        text: `You are about to delete "${this.user_data.username}"`,
-        accept: this.deleteRecord,
-        acceptText: 'Delete'
-      })
+    addAction () {
+      this.actions.push({action: -1});
     },
-    deleteRecord () {
-      /* Below two lines are just for demo purpose */
-      this.$router.push({name:'app-user-list'})
-      this.showDeleteSuccess()
+    create () {
 
-      /* UnComment below lines for enabling true flow if deleting user */
-      this.$store.dispatch("userManagement/removeRecord", this.user_data.id)
-        .then(()   => { this.$router.push({name:'app-user-list'}); this.showDeleteSuccess() })
-        .catch(err => { console.error(err)       })
     },
-    showDeleteSuccess () {
-      this.$vs.notify({
-        color: 'success',
-        title: 'User Deleted',
-        text: 'The selected user was successfully deleted'
-      })
-    }
+    // confirmDeleteRecord () {
+    //   this.$vs.dialog({
+    //     type: 'confirm',
+    //     color: 'danger',
+    //     title: 'Confirm Delete',
+    //     text: `You are about to delete "${this.user_data.username}"`,
+    //     accept: this.deleteRecord,
+    //     acceptText: 'Delete'
+    //   })
+    // },
+    // deleteRecord () {
+    //   /* Below two lines are just for demo purpose */
+    //   this.$router.push({name:'app-user-list'})
+    //   this.showDeleteSuccess()
+
+    //   /* UnComment below lines for enabling true flow if deleting user */
+    //   this.$store.dispatch("userManagement/removeRecord", this.user_data.id)
+    //     .then(()   => { this.$router.push({name:'app-user-list'}); this.showDeleteSuccess() })
+    //     .catch(err => { console.error(err)       })
+    // },
+    // showDeleteSuccess () {
+    //   this.$vs.notify({
+    //     color: 'success',
+    //     title: 'User Deleted',
+    //     text: 'The selected user was successfully deleted'
+    //   })
+    // }
   },
   // created () {
   //   // Register Module UserManagement Module
@@ -256,7 +267,9 @@ export default {
   components: {
     'v-select': vSelect,
     'user-item': UserItem,
-    'routine-row': RoutineRow
+    'routine-row': RoutineRow,
+    'action-row': ActionRow,
+    'search-field': SearchField,
   }
 }
 

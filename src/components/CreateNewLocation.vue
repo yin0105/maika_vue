@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <div class="overlay" :style="style">
+    <div :style="style">
+        <div class="overlay">
         </div>
         <div class="component-on-overlay">
             <div class="popup-on-overlay">
@@ -98,10 +98,10 @@
                         </div>
 
                         <div class="mt-20 flex justify-between">
-                            <b-button variant="" class="bottom-btn back create flex items-center">
+                            <b-button variant="" class="bottom-btn back create flex items-center" @click="cancel">
                                 CANCEL
                             </b-button>
-                            <b-button variant="success" class="bottom-btn create flex items-center">
+                            <b-button variant="success" class="bottom-btn create flex items-center" @click="clickNewLocation">
                                 <feather-icon icon="PlusCircleIcon"/>
                                 NEW LOCATION
                             </b-button>
@@ -137,6 +137,12 @@
         background-color: white;
         border-radius: 20px;
         padding: 37px 42px 48px 33px !important;
+    }
+
+    @media (max-width: 1200px) {
+        .component-on-overlay {
+            left: 0px !important;
+        }
     }
 
     .toggle-checkbox:checked {        
@@ -188,7 +194,7 @@ export default {
         }
     },
     props: {
-        disp: { type: Boolean, default: false }  
+        disp: { type: Boolean, default: false },
     },
     computed: {
         style () {
@@ -199,6 +205,12 @@ export default {
         getValidationState({ dirty, validated, valid = null }) {
             return dirty || validated ? valid : null;
         },
+        clickNewLocation() {
+            this.$emit('update:location', false);
+        },
+        cancel() {
+            this.$emit('update:location', false);
+        }        
     },
     components: {
         'v-select': vSelect,
