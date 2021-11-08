@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-4 flex items-start my-action-one-row">
+    <div class="mt-2 mb-4 flex items-start my-action-first-row">
         <validation-provider
             name="MaikaRespond"
             :rules="{ required: true, min: 1 }"
@@ -69,7 +69,7 @@
 </script>
 
 <style lang="scss">
-    .my-action-one-row {
+    .my-action-first-row {
         span:not(.feather-icon) {
             width: 100% !important;
         }

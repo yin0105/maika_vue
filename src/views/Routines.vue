@@ -29,7 +29,7 @@
         </div>
 <!-- 2nd Column -->
         <div class="lg:col-span-4">    
-          <vx-card title="Trigger Condition" class="mb-base pr-12">
+          <vx-card title="Trigger Condition" class="mb-base">
             <div class="w-full flex items-center">
               <span class="text-nowrap mr-8 f-18-22 c-1">Via Device</span>
               <v-select :options="devices" label="title" class="select-with-image w-full">
@@ -40,6 +40,7 @@
                   <img :src="option.image" width="22px" height="22px" />{{ option.title }}
                 </template>
               </v-select>
+              <feather-icon icon="XCircleIcon" class="ml-4 cursor-pointer" style="color: #C03221; visibility: hidden" />
             </div>
 
             <div class="f-18-22 h-29 mt-4 c-1 flex items-center">
@@ -78,7 +79,7 @@
               <action-row v-for="(action, index) in actions" :actionIndex="index" :actionType="action.action" :key="index" v-bind.sync="reaction" />
             </div>
 
-            <div class="mt-20 flex justify-between">
+            <div class="mt-12 flex justify-between">
                 <b-button variant="" class="bottom-btn back create flex items-center" @click="addAction">
                     ADD
                 </b-button>
