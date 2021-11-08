@@ -37,8 +37,8 @@
     span {
         line-height: 28px;
         img {
-            margin-right: 23px;
-            margin-left: 12px;
+            margin-right: 16px;
+            margin-left: 2px;
         }
     }
     input {
@@ -127,6 +127,10 @@
     color: $blue;
 }
 
+.c-black {
+    color: $black;
+}
+
 .ml-px-10 {
     margin-left: 10px !important;
 }
@@ -174,6 +178,22 @@
             border-radius: 2px !important;
         }
     }
+
+    &.p-icon.p-check-22 input:checked ~ .state {
+        width: 24px !important;
+        font-size: 22px;
+
+        label:before {
+            border-color: $check-border !important;
+            border-radius: 3px !important;
+        }
+
+        &.p-my-primary {
+            border-color: $primary !important;
+            border-radius: 2px !important;
+        }
+    }
+
     
     .state {
         label:before {
@@ -187,6 +207,12 @@
                 border-radius: 2px !important;
             }
         }
+    }
+}
+
+.v-select.hidden-close-in-select {
+    button {
+        display: none;
     }
 }
 

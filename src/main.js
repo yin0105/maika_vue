@@ -91,6 +91,16 @@ import store from './store/store'
 // i18n
 import i18n from './i18n/i18n'
 
+// import Toast from "vue-toastification";
+// // Import the CSS or use your own!
+// import "vue-toastification/dist/index.css";
+
+// const options = {
+//   // You can set your default options here
+// };
+
+// Vue.use(Toast, options);
+
 
 // Vuexy Admin Filters
 // import './filters/filters'
@@ -134,6 +144,10 @@ import 'prismjs/themes/prism-tomorrow.css'
 
 // Feather font icon
 require('./assets/css/iconfont.css')
+
+import Notifications from "vue-notification";
+
+Vue.use(Notifications);
 
 // import VueMaterialIcon from 'vue-material-icon'
 // Vue.component(VueMaterialIcon.name, VueMaterialIcon)

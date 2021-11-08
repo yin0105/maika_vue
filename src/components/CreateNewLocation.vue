@@ -2,7 +2,10 @@
     <div :style="style">
         <div class="overlay">
         </div>
-        <div class="component-on-overlay">
+
+        <my-notify v-if="notify.show" text="You’ve successfully added a new Location" style="z-index: 63000 !important" v-bind.sync="notify"/>
+
+        <div class="component-on-overlay" v-else>
             <div class="popup-on-overlay">
                 <validation-observer ref="observer" v-slot="{ handleSubmit }">
                     <b-form @submit.stop.prevent="handleSubmit(onSubmit)">
@@ -114,6 +117,63 @@
     </div>
 </template>
 
+
+<script>
+import { countries } from './data/data.js'
+import vSelect from 'vue-select'
+import MyNotify from './MyNotify.vue'
+
+export default {
+    data() {
+        return {
+            city: '',
+            countries: countries,
+            selectedContry: null,
+            location: null,
+            checked: false,
+            notify: {
+                show: null,
+            },
+        }
+    },
+    props: {
+        disp: { type: Boolean, default: false },
+    },
+    computed: {
+        style () {
+            return 'display: ' + (this.disp ? 'block': 'none')
+        }
+    },
+    watch: {
+        notify: {
+            handler: function(newNotify) {
+                if (newNotify.show === false) {
+                    this.notify.show = null
+                    this.$emit('update:location', false)
+                }
+            },
+            deep: true,
+        }
+    },
+    methods: {
+        getValidationState({ dirty, validated, valid = null }) {
+            return dirty || validated ? valid : null;
+        },
+        clickNewLocation() {
+            this.notify.show = true;
+        },
+        cancel() {
+            this.$emit('update:location', false);
+        }        
+    },
+    components: {
+        'v-select': vSelect,
+        'my-notify': MyNotify,
+    }   
+}
+</script>
+
+
 <style>
     .component-on-overlay {
         position: absolute;
@@ -178,45 +238,6 @@
         height: 44px !important;
     }
 </style>
-
-<script>
-import { countries } from './data/data.js'
-import vSelect from 'vue-select'
-
-export default {
-    data() {
-        return {
-            city: '',
-            countries: countries,
-            selectedContry: null,
-            location: null,
-            checked: false,
-        }
-    },
-    props: {
-        disp: { type: Boolean, default: false },
-    },
-    computed: {
-        style () {
-            return 'display: ' + (this.disp ? 'block': 'none')
-        }
-    },
-    methods: {
-        getValidationState({ dirty, validated, valid = null }) {
-            return dirty || validated ? valid : null;
-        },
-        clickNewLocation() {
-            this.$emit('update:location', false);
-        },
-        cancel() {
-            this.$emit('update:location', false);
-        }        
-    },
-    components: {
-        'v-select': vSelect,
-    }   
-}
-</script>
 
 <style lang="scss">
 

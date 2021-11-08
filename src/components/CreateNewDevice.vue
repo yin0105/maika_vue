@@ -2,7 +2,9 @@
     <div :style="style">
         <div class="overlay">
         </div>
-        <div class="component-on-overlay">
+        <my-notify v-if="notify.show" text="You’ve successfully added a new Device" style="z-index: 63000 !important" v-bind.sync="notify"/>
+        
+        <div class="component-on-overlay" v-else>
             <div class="popup-on-overlay">
                 <validation-observer ref="observer" v-slot="{ handleSubmit }">
                     <b-form @submit.stop.prevent="handleSubmit(onSubmit)">
@@ -85,6 +87,7 @@
 <script>
 import vSelect from 'vue-select'
 import SearchField from './SearchField.vue'
+import MyNotify from './MyNotify.vue'
 
 export default {
     data() {
@@ -92,7 +95,10 @@ export default {
             location: null,
             deviceType: null,
             brand: null,
-            device: null
+            device: null,
+            notify: {
+                show: null,
+            },
         }
     },
     props: {
@@ -103,21 +109,33 @@ export default {
             return 'display: ' + (this.disp ? 'block': 'none')
         }
     },
+    watch: {
+        notify: {
+            handler: function(newNotify) {
+                if (newNotify.show === false) {
+                    this.notify.show = null
+                    this.$emit('update:device', false)
+                }
+            },
+            deep: true,
+        }
+    },
     methods: {
         getValidationState({ dirty, validated, valid = null }) {
             return dirty || validated ? valid : null;
         },
         clickNewDevice() {
-            this.$emit('update:device', false);
+            this.notify.show = true;
         },
         cancel() {
             this.$emit('update:device', false);
-        }        
+        },     
     },
     components: {
         'v-select': vSelect,
         'search-field': SearchField,
-    }   
+        'my-notify': MyNotify,
+    },
 }
 </script>
 
@@ -131,8 +149,9 @@ export default {
         width: 100vw;
         height: 100vh;
 
-        background: rgba(127, 134, 142, 0.8);
-        backdrop-filter: blur(5.44px);
+        /* background: rgba(127, 134, 142, 0.8);
+        backdrop-filter: blur(5.44px); */
+        background-color: transparent;
         z-index: 61000;    
     }
 

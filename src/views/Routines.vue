@@ -7,26 +7,38 @@
             <div class="sub-title px-4">
                 Type of targeted entity
             </div>  
-            <v-select :options="['User','Location']" class="px-4" />
-            <div v-if="targetedEntityType == 'User'"  class="px-4 flex mt-6 items-center">
-                <span class="w-2/5 c-1">Filter by</span>
-                <v-select :options="['User','Location']" class="w-3/5 "/>
+            
+            <v-select :options="['User','Location']" v-model="entityType" class="px-4" />
+            
+            <div v-if="entityType == 'User'">
+              <div class="px-4 flex mt-6 items-center">
+                  <span class="w-2/5 c-1">Filter by</span>
+                  <v-select :options="['User','Location']" class="w-3/5 "/>
+              </div>
+              <div class="mt-8 mb-2">
+                <ul>
+                  <li class="cursor-pointer" v-for="(contact, index) in contacts" :key="index">
+                    <user-item :contact="contact" :narrow="narrow"/>
+                  </li>
+                </ul>
+              </div>
             </div>
-            <div class="mt-8 mb-2">
-              <ul>
-                <li class="cursor-pointer" v-for="(contact, index) in contacts" :key="index">
-                  <user-item :contact="contact" :narrow="narrow"/>
-                </li>
-              </ul>
+
+            <div v-if="entityType == 'Location'" class="mt-4">
+              <location-row v-for="(location, index) in locations" :key="index" :rowIndex="index" :selected="index == selectedLocation.index" :title="location.title" v-bind.sync="selectedLocation" />
             </div>
+            
             <div class="mt-12">
               <b-button variant="primary" class="bottom-btn create flex items-center mx-auto">
                 <feather-icon icon="PlusCircleIcon"/>
-                Choose
+                CHOOSE
               </b-button>
             </div>
+
           </vx-card>
         </div>
+
+
 <!-- 2nd Column -->
         <div class="lg:col-span-4">    
           <vx-card title="Trigger Condition" class="mb-base">
@@ -96,14 +108,13 @@
           <vx-card title="All Routines" class="mb-base">
             <div class="grid grid-cols-9 gap-8 mb-1">
               <div class="col-span-1 flex items-center">
-                <p-check class="p-icon p-smooth ml-6">
+                <p-check class="p-icon p-smooth ml-6 p-check-22">
                   <i slot="extra" class="icon mdi mdi-check">
                     <feather-icon icon="CheckIcon" svgClasses="h-4 w-4 cursor-pointer text-success" class="hover:text-danger"/>
                   </i>
                 </p-check>
               </div>
               <div class="col-span-4">              
-                <!-- <vs-input icon-pack="feather" icon="icon-search" placeholder="Search By User name" icon-no-border class="w-full"/> -->
                 <search-field placeholder="Search by User name" />
               </div>
               <div class="col-span-2">              
@@ -136,16 +147,35 @@ import moduleChat          from '@/store/chat/moduleChat.js'
 import { contacts } from './data'
 import ActionRow from '../components/ActionRow.vue'
 import SearchField from '../components/SearchField.vue'
+import LocationRow from '../components/LocationRow.vue'
 
 export default {  
   data () {
     return {
       user_data: null,
       user_not_found: false,
-      targetedEntityType: 'User',
+      entityType: null,
       contacts: contacts,
       narrow: true,
       reconigedByCamera: true,
+      locations: [
+        {
+          value: 0,
+          title: 'Main Office',
+        },
+        {
+          value: 1,
+          title: 'Vĩnh Long Office',
+        },
+        {
+          value: 2,
+          title: 'Tân Bình Showroom',
+        }
+      ],
+      selectedLocation: {
+        index: 0
+      },
+      selectedLocationIndex: 0,
       devices: [
                 {
                   value: 0,
@@ -194,6 +224,12 @@ export default {
       },
       deep: true,
     },
+
+    selectedLocation: {
+      handler: function (newSelectedLocation) {
+        console.log("== index = ", newSelectedLocation.index)
+      }
+    }
   },
   methods: {
     addAction () {
@@ -202,75 +238,14 @@ export default {
     create () {
 
     },
-    // confirmDeleteRecord () {
-    //   this.$vs.dialog({
-    //     type: 'confirm',
-    //     color: 'danger',
-    //     title: 'Confirm Delete',
-    //     text: `You are about to delete "${this.user_data.username}"`,
-    //     accept: this.deleteRecord,
-    //     acceptText: 'Delete'
-    //   })
-    // },
-    // deleteRecord () {
-    //   /* Below two lines are just for demo purpose */
-    //   this.$router.push({name:'app-user-list'})
-    //   this.showDeleteSuccess()
-
-    //   /* UnComment below lines for enabling true flow if deleting user */
-    //   this.$store.dispatch("userManagement/removeRecord", this.user_data.id)
-    //     .then(()   => { this.$router.push({name:'app-user-list'}); this.showDeleteSuccess() })
-    //     .catch(err => { console.error(err)       })
-    // },
-    // showDeleteSuccess () {
-    //   this.$vs.notify({
-    //     color: 'success',
-    //     title: 'User Deleted',
-    //     text: 'The selected user was successfully deleted'
-    //   })
-    // }
   },
-  // created () {
-  //   // Register Module UserManagement Module
-  //   this.$store.registerModule('chat', moduleChat)
-  //   this.$store.dispatch('chat/fetchContacts')
-  //   if (!moduleUserManagement.isRegistered) {
-  //     this.$store.registerModule('userManagement', moduleUserManagement)
-  //     moduleUserManagement.isRegistered = true
-  //   }
-
-  //   const userId = this.$route.params.userId
-  //   this.$store.dispatch('userManagement/fetchUser', '268')
-  //     .then(res => { this.user_data = res.data })
-  //     .catch(err => {
-  //       if (err.response.status === 404) {
-  //         this.user_not_found = true
-  //         return
-  //       }
-  //       console.error(err) 
-  //     })
-  // },
-  // beforeDestroy () {
-  //   this.$store.unregisterModule('chat')
-  // },
-  // mounted () {
-  //   this.$store.dispatch('chat/setChatSearchQuery', '')
-  // },
-  // computed: {
-  //   contacts () {
-  //     console.log("contact = ", this.$store.getters['chat/contacts'])
-  //     return this.$store.getters['chat/contacts'].map(contact => {
-  //       contact.status = contact.status == "online"? "#2DCA8C": "#FF715B";
-  //       return contact;
-  //     });
-  //   },
-  // },
   components: {
     'v-select': vSelect,
     'user-item': UserItem,
     'routine-row': RoutineRow,
     'action-row': ActionRow,
     'search-field': SearchField,
+    'location-row': LocationRow,
   }
 }
 

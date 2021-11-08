@@ -323,7 +323,7 @@ export default {
   .upload-btn {
     background-color: white !important;
     color: #4A4A4A !important;
-    font-family: SF Pro Text;
+    font-family: 'Source Sans Pro', sans-serif;
     font-size: 14px;
     line-height: 18px;
     border-radius: 10px;
@@ -347,6 +347,7 @@ export default {
 </style>
 
 <style lang="scss">
+  @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;400;600&display=swap');
   @import "@/assets/scss/vuexy/extraComponents/_form.scss";
   @import "@/assets/scss/vuexy/extraComponents/_button.scss";
   @import "@/assets/scss/vuexy/extraComponents/_select.scss";

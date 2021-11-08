@@ -11,6 +11,19 @@
 <template>
   <div id="app" :class="vueAppClasses">
     <router-view @setAppClasses="setAppClasses" />
+    <!-- <notifications position="top left"/> -->
+    <notifications>
+    <template slot="body" slot-scope="props">
+      <div class="flex items-center h-full ml-4">
+          <a class="close mr-4" @click="props.close($event); props.item.closed=true;">
+            <!-- <i class="fa fa-fw fa-close"></i> -->
+            <feather-icon icon="XIcon" style="color: #232D42; position: absolute !important; right: 16px; top: 18px; " />
+          </a>
+          <div v-html="props.item.text">
+          </div>
+      </div>
+    </template>
+  </notifications>
   </div>
 </template>
 

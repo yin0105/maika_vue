@@ -10,7 +10,8 @@
                     <img :src="option.image" width="22px" height="22px" />{{ option.title }}
                 </template>
             </v-select>
-            <feather-icon icon="XCircleIcon" class="ml-4 cursor-pointer" :style="[{'color': '#C03221'}, actionIndex==0 ? {'visibility': 'hidden'}: {}]" @click="removeAction" />
+            <!-- <feather-icon icon="XCircleIcon" class="ml-4 cursor-pointer" :style="[{'color': '#C03221'}, actionIndex==0 ? {'visibility': 'hidden'}: {}]" @click="removeAction" /> -->
+            <feather-icon icon="XCircleIcon" class="ml-4 cursor-pointer" style="color: #C03221" @click="removeAction" />
         </div>
         <div v-if="actionType == 0">
             <action-first-row v-for="(one_row, index) in firstChildren" :key="index" :rowIndex="index" :content="one_row" :isLastIndex="index == firstChildren.length - 1" v-bind.sync="firstReaction" />

@@ -22,7 +22,7 @@
             </div>
             <div class="flex justify-content-center">
                 <b-button class="bottom-btn flex items-center">
-                    <feather-icon icon="SettingsIcon" class="mr-2"/>
+                    <feather-icon icon="SettingsIcon" />
                     CONFIGURE
                 </b-button>
             </div>
@@ -50,9 +50,6 @@
         background-color: transparent !important;
         border: none;
         padding: 0px; 
-        /* border-radius: 50%;
-        background-color: #375CE8 !important;
-        font-size: 32px; */
     }
 </style>
 

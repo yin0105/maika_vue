@@ -2,7 +2,7 @@
     <div class="grid grid-cols-12 gap-4 routine-row flex items-center">
         <div class="user-avatar-info flex items-center overflow-hidden col-span-5 flex items-center">
             <div>
-                <p-check class="p-icon p-smooth ml-6">
+                <p-check class="p-icon p-smooth ml-6 p-check-22">
                     <i slot="extra" class="icon mdi mdi-check">
                         <feather-icon icon="CheckIcon" svgClasses="h-4 w-4 cursor-pointer text-success" class="hover:text-danger"/>
                     </i>
@@ -93,5 +93,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import "@/assets/scss/vuexy/extraComponents/_routineRow.scss"
+@import "@/assets/scss/vuexy/extraComponents/_routineRow.scss";
+@import "@/assets/scss/vuexy/extraComponents/_form.scss";
 </style>

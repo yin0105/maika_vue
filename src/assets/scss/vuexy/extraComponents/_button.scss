@@ -7,14 +7,14 @@
     Author URL: http://www.themeforest.net/user/pixinvent
 ==========================================================================================*/
 @import '../_variables.scss';
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;400;600&display=swap');
 
 .my-btn-primary.vs-button-filled {
     background-color: $primary !important;
     padding: 11px 16px 10px 16px !important;
     font-size: 14px !important;
     line-height: 17px !important;
-    // font-family: SF Pro Text;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     font-weight: 600;
     border-radius: 4px;
 
@@ -29,7 +29,7 @@
 }
 
 .bottom-btn {
-    font-family: SF Pro Text;
+    font-family: 'Source Sans Pro', sans-serif;
     font-size: 14px;
     line-height: 17px;
     border-radius: 5px;

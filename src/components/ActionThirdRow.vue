@@ -2,10 +2,11 @@
     <div class="flex justify-between mt-2 mb-4">
         <div class="w-full ml-8 flex items-center gap-2">
             <span class="f-18-22 h-44 c-1 flex items-center">Select</span>
-            <v-select id="_device" :options="devices" :value="devices[device]" class="w-full" @input="changeDevice($event)" />
+            <!-- <v-select :options="devices" :value="devices[device]" class="w-full" @input="changeDevice($event)" /> -->
+            <v-select :options="devices" :value="devices[device]" class="w-full hidden-close-in-select" @input="changeDevice($event)" />
         
             <span class="f-18-22 h-44 c-1 flex items-center text-nowrap">and do</span>
-            <v-select id="_iotAction" :options="iotActions" :value="iotActions[iotAction]" class="w-full" @input="changeIotAction($event)"/>
+            <v-select id="_iotAction" :options="iotActions" :value="iotActions[iotAction]" class="w-full hidden-close-in-select" @input="changeIotAction($event)"/>
             <feather-icon v-if="isLastIndex" icon="PlusCircleIcon" class="ml-4 cursor-pointer" style="color: #232D42" @click="addRow" />
             <feather-icon v-else icon="MinusCircleIcon" class="ml-4 cursor-pointer" style="color: #232D42" @click="removeRow" />
         </div>
@@ -32,11 +33,11 @@
                 iotActions: [
                     {
                         value: 0,
-                        label: "IoT Action",
+                        label: "Action 1",
                     },
                     {
                         value: 1,
-                        label: "IoT Action 2",
+                        label: "Action 2",
                     },
                 ]
             }
