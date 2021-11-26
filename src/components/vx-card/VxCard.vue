@@ -19,7 +19,8 @@
         <div class="vx-card__header" v-if="hasHeader">
 
             <!-- card title -->
-            <div class="vx-card__title">
+            <div class="vx-card__title flex">
+                <img :src="require(`@/assets/images/svg/${this.$props.titleIcon}.svg`)" v-if="this.$props.titleIcon" class="mb-2 mr-2" @click="goBack">
                 <h4 v-if="this.$props.title" :style="titleStyles" :class="titleClasses">{{ title }}</h4>
                 <h6 v-if="this.$props.subtitle" :style="subtitleStyles" :class="subtitleClasses">{{ subtitle }}</h6>
             </div>
@@ -74,6 +75,7 @@ import _color from '@/assets/utils/color.js'
 export default{
   name: 'vx-card',
   props: {
+    titleIcon: String,
     title: String,
     subtitle: String,
     actionButtons: {
@@ -281,7 +283,11 @@ export default{
           this.tempHidden = false
         }, 150)
       }
+    },
+    goBack() {
+      this.$emit("update:value", false)
     }
+
   },
   components: {
     Prism

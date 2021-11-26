@@ -1,9 +1,9 @@
 <template>
   <div id="page-user-view">
 
-    <div id="user-data" class="grid lg:grid-cols-11 lg:gap-10">
+    <div class="grid lg:grid-cols-11 lg:gap-10">
         <div class="lg:col-span-2">    
-          <vx-card title="Users/Location" class="mb-base px0">
+          <vx-card  v-if="!editing.value" title="Users/Location" class="mb-base px0">
             <div class="sub-title px-4">
                 Type of targeted entity
             </div>  
@@ -41,7 +41,7 @@
 
 <!-- 2nd Column -->
         <div class="lg:col-span-4">    
-          <vx-card title="Trigger Condition" class="mb-base">
+          <vx-card title="Trigger Condition" :titleIcon="editing.value ? 'arrow-left': ''" class="mb-base" v-bind.sync="editing">
             <div class="w-full flex items-center">
               <span class="text-nowrap mr-8 f-18-22 c-1">Via Device</span>
               <v-select :options="devices" label="title" class="select-with-image w-full">
@@ -91,21 +91,39 @@
               <action-row v-for="(action, index) in actions" :actionIndex="index" :actionType="action.action" :key="index" v-bind.sync="reaction" />
             </div>
 
-            <div class="mt-12 flex justify-between">
-                <b-button variant="" class="bottom-btn back create flex items-center" @click="addAction">
-                    ADD
+            <div v-if="editing.value" class="mt-12 flex justify-between">
+                <b-button variant="outline-primary" class="f-14-17 h-41 flex items-center pr-6" @click="addAction">
+                  <feather-icon icon="PlusCircleIcon" class="svg-w-20-mr-14"/>
+                  ADD
+                </b-button>
+                <div class="flex">
+                  <b-button variant="outline-danger" class="f-14-17 h-41 flex items-center mr-6 px-6" @click="addAction">
+                    DELETE
+                  </b-button>
+                  <b-button variant="primary" class="create flex items-center px-6" @click="create">
+                    EDIT
+                  </b-button>
+                </div>
+            </div>
+
+            <div v-else class="mt-12 flex justify-between">
+                <b-button variant="outline-primary" class="f-14-17 h-41 flex items-center pr-6" @click="addAction">
+                  <feather-icon icon="PlusCircleIcon" class="svg-w-20-mr-14"/>
+                  ADD
                 </b-button>
                 <b-button variant="success" class="bottom-btn create flex items-center" @click="create">
-                    <feather-icon icon="PlusCircleIcon"/>
+                    <img :src="require('@/assets/images/svg/stack-arrow-forward.svg')" class="mr-2"/>
                     CREATE
                 </b-button>
             </div>
+            
+
           </vx-card>
         </div>
 
 <!-- 3rd Column -->
         <div class="lg:col-span-5">    
-          <vx-card title="All Routines" class="mb-base">
+          <vx-card  v-if="!editing.value" title="All Routines" class="mb-base">
             <div class="grid grid-cols-9 gap-8 mb-1">
               <div class="col-span-1 flex items-center">
                 <p-check class="p-icon p-smooth ml-6 p-check-22">
@@ -128,13 +146,13 @@
             <div class="mb-12">
               <ul class="mt-8">
                 <li class="cursor-pointer" v-for="(contact, index) in contacts" :key="index">
-                  <routine-row :contact="contact"/>
+                  <routine-row :contact="contact" v-bind.sync="editing"/>
                 </li>
               </ul>
             </div>             
           </vx-card>
         </div>
-      </div>
+    </div>
   </div>
 </template>
 
@@ -158,6 +176,9 @@ export default {
       contacts: contacts,
       narrow: true,
       reconigedByCamera: true,
+      editing: {
+        value: true,
+      },
       locations: [
         {
           value: 0,
