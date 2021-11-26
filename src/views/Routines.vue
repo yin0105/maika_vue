@@ -177,7 +177,7 @@ export default {
       narrow: true,
       reconigedByCamera: true,
       editing: {
-        value: true,
+        value: false,
       },
       locations: [
         {
